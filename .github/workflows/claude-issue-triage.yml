@@ -63,3 +63,15 @@ jobs:
                  gh issue comment ${{ github.event.issue.number }} --edit-last --body "..."
                - Si no existe ninguno, créalo con:
                  gh issue comment ${{ github.event.issue.number }} --body "..."
+
+      - name: Verify labels were applied
+        if: always() && steps.claude-triage.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          LABEL_COUNT=$(gh issue view ${{ github.event.issue.number }} --json labels --jq '.labels | length')
+          if [ "$LABEL_COUNT" -eq 0 ]; then
+            echo "::error::Claude no aplicó ninguna label al issue #${{ github.event.issue.number }}"
+            exit 1
+          fi
+          echo "Labels aplicadas correctamente ($LABEL_COUNT)."
