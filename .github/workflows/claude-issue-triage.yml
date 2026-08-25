@@ -23,6 +23,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: '--allowed-tools "Bash(gh issue edit:*),Bash(gh issue view:*),Bash(gh issue comment:*)"'
           prompt: |
             Analiza el issue #${{ github.event.issue.number }} de este repositorio
             (un Tetris en JavaScript vanilla, ver CLAUDE.md para la arquitectura del juego).
@@ -51,6 +52,11 @@ jobs:
                  wall kicks, loop de juego, line clearing, scoring/leveling,
                  ghost piece, etc.).
                - Próximos pasos sugeridos para abordarlo.
+
+               El comentario debe estar escrito en formato Markdown válido
+               para GitHub (encabezados con #, listas con -, bloques de código
+               con ```, etc.), ya que se publica tal cual como comentario del
+               issue.
 
                El comentario debe empezar exactamente con este encabezado, para
                poder identificarlo en futuras ediciones:
