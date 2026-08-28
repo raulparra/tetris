@@ -230,3 +230,18 @@ kbd {
 #restart-btn:hover {
   background: var(--btn-hover-bg);
 }
+
+/* ---- Selector de skin ---- */
+.skin-select {
+  position: absolute;
+  top: 0;
+  right: 44px;
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  border-radius: 6px;
+  height: 34px;
+  padding: 0 8px;
+  font-size: 12px;
+  color: var(--text);
+  cursor: pointer;
+}
